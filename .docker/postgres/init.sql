@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS migrations (
+    id serial PRIMARY KEY,
+    name VARCHAR ( 255 ) NOT NULL,
+    executed_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);

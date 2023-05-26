@@ -1,0 +1,32 @@
+version: '3.8'
+services:
+  database:
+    container_name: postgres
+    image: postgres:14.1-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: test
+      TZ: Europe/Vilnius
+    ports:
+      - '5432:5432'
+    volumes:
+      - db:/var/lib/postgresql/data
+  cache:
+    container_name: redis
+    build:
+        context: .
+        dockerfile: ./.docker/redis/dockerfile
+    restart: always
+    environment:
+      - TZ=Europe/Vilnius
+    ports:
+      - '6379:6379'
+    volumes:
+      - redis:/data
+volumes:
+  db:
+    driver: local
+  redis:
+      driver: local
